@@ -18,7 +18,7 @@ import {
   StatusBar,
   Dimensions,
 } from 'react-native';
-import {Input, Button, CheckBox} from './src/Components';
+import {Input, Button, CheckBox, OtherSignOptions} from './src/Components';
 const {width, height} = Dimensions.get('window');
 export default class App extends Component {
 
@@ -39,16 +39,16 @@ export default class App extends Component {
       <>
         <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
           <ScrollView contentContainerStyle={{flex: 1}}>
-            <View style={[styles.subContainer, {flex: 1.5}]}>
+            <View style={[styles.subContainer, {flex: 1, justifyContent: 'center'}]}>
               <Image
                 style={styles.netflix}
                 source={require('./src/images/netflix-logo.jpeg')}
               />
             </View>
-            <View style={{flex: 2}}>
+            <View style={[styles.subContainer, {flex: 2}]}>
               <Text
-                style={[styles.lightText, styles.subContainer, {fontSize: 30}]}>
-                {' '}
+                style={[styles.lightText, {fontSize: 35, marginBottom : '7%'}]}>
+
                 Sign In
               </Text>
               <Input
@@ -72,7 +72,12 @@ export default class App extends Component {
                   styles.lightText
                 }></Button>
             </View>
-            <View style={{flex: 2}}></View>
+            <View style={{flex: 1}}>
+              <CheckBox/>
+            </View>
+            <View style={{flex: 1}}>
+              <OtherSignOptions style = {styles.subContainer}/>
+            </View>
           </ScrollView>
         </SafeAreaView>
       </>
@@ -80,8 +85,8 @@ export default class App extends Component {
   }
 }
 const styles = {
-  subContainer: {justifyContent: 'center', marginLeft: '8%'},
-  darkText: {color: 'gray', backgroundColor: 'gray'},
+  subContainer: {marginLeft: '8%'},
+  darkText: {color: '#8a8888', backgroundColor: '#333333'},
   lightText: {color: 'white', fontWeight: 'bold'},
-  netflix: {width: width * 0.32, height: width * 0.13},
+  netflix: {width: width * 0.35, height: width * 0.18},
 };
