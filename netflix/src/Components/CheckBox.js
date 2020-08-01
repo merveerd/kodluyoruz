@@ -1,40 +1,39 @@
 import React from 'react';
-import { Text, Image, View, TouchableOpacity } from 'react-native';
+import {Text, Image, View, TouchableOpacity} from 'react-native';
 
 const CheckBox = (props) => {
   return (
     //style lari css dosyasina tasi en son
-   
-    <View style={{flexDirection: 'row', alignItems: 'center', marginTop : '-5%'}}>
+
+    <View
+      style={{flexDirection: 'row', alignItems: 'center', marginTop: '-5%'}}>
       <TouchableOpacity
-        
-        style={{
-          width: 20,
-          height: 20,
-          backgroundColor : '#8a8888',
-          marginLeft: '7%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 2,
-        }}>
-                
-          
+        onPress={props.onPress}
+        style={[
+          {
+            width: 20,
+            height: 20,
+            backgroundColor: '#8a8888',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 2,
+          },
+          props.style,
+        ]}>
         {props.status && (
-          <View
-            style={{
-              width: 15,
-              height: 15,
-              backgroundColor: 'white',
-              borderWidth: 1.5,
-              borderColor: 'white',
-              borderRadius: 3,
-            }}
-          />
+          <>
+            <Image
+              style={{width: '100%', height: '100%'}}
+              source={require('../images/check.png')}></Image>
+          </>
         )}
-     
       </TouchableOpacity>
-      <Text style={{color :'#8a8888', fontWeight: 'bold', marginLeft : '2%'}}>Remember Me</Text>
-      <Text style={{color :'#8a8888', fontWeight: 'bold', marginLeft : '38%'}}>Need Help?</Text>
+      <Text style={{color: '#8a8888', fontWeight: 'bold', marginLeft: '2%'}}>
+        Remember Me
+      </Text>
+      <TouchableOpacity style={{marginLeft: 'auto', marginRight: '5%'}}>
+        <Text style={{color: '#8a8888', fontWeight: 'bold'}}>Need Help?</Text>
+      </TouchableOpacity>
     </View>
   );
 };

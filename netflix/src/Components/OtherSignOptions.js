@@ -18,9 +18,11 @@ const OtherSignOptions = (props) => {
           style={{width: '6%', height: '130%'}}
           source={require('../images/facebook.jpeg')}
         />
+        <TouchableOpacity>
         <Text style={optionStyle}>
           Login with Facebook
         </Text>
+        </TouchableOpacity>
       </View>
       <View style = {[props.style, {flexDirection : 'row', marginTop : '10%'}]}>
       <Text style={[{ color: '#8a8888',fontSize : 18}]}> New To Netflix?</Text>
@@ -34,4 +36,4 @@ const OtherSignOptions = (props) => {
 };
 
 export {OtherSignOptions};
-//<Image source = '../images/facebook.jpeg'/>
+

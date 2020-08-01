@@ -25,14 +25,14 @@ export default class App extends Component {
   state = {
     username: '',
     password: '',
-    isShowPassword: false
+    isRememberChecked: false
   }
 
   render() {
     const {
       username,
       password,
-      isShowPassword
+      isRememberChecked
 
     } = this.state;
     return (
@@ -60,6 +60,7 @@ export default class App extends Component {
               <Input style={styles.darkText}
                placeholder={'Password'}
                value = {this.state.password}
+               keyboardType={'numeric'}
                onChangeText = {(password) => this.setState({password})}
                />
               <Button
@@ -73,7 +74,10 @@ export default class App extends Component {
                 }></Button>
             </View>
             <View style={{flex: 1}}>
-              <CheckBox/>
+              <CheckBox
+              style={styles.subContainer}
+               status={isRememberChecked}
+               onPress={() => this.setState({ isRememberChecked: !isRememberChecked })}/>
             </View>
             <View style={{flex: 1}}>
               <OtherSignOptions style = {styles.subContainer}/>
