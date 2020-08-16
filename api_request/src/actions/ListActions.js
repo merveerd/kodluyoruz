@@ -1,11 +1,18 @@
 import {
     LIST_START,
     LIST_SUCCESS,
-    LIST_FAILD,
-    BASE_URL
+    LIST_FAILED,
+    BASE_URL,
+
+    ADD_ITEM_START,
+    ADD_ITEM_SUCCESS,
+    ADD_ITEM_FAILED
 } from './types'
 
-import { get } from './api'
+import {
+    get,
+    post
+} from './api'
 
 export const getList = (params) => {
     return (dispatch) => {
@@ -15,7 +22,21 @@ export const getList = (params) => {
             dispatch,
             LIST_START,
             LIST_SUCCESS,
-            LIST_FAILD
+            LIST_FAILED
         )
     }
+}
+
+export const postData = (params) => {
+    return (dispatch) => {
+        post(
+            BASE_URL.concat('/api/characters'),
+            params,
+            dispatch,
+            ADD_ITEM_START,
+            ADD_ITEM_SUCCESS,
+            ADD_ITEM_FAILED
+        )
+    }
+
 }

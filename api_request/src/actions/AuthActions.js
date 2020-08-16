@@ -1,11 +1,11 @@
 import {
     LOGIN_START,
     LOGIN_SUCCESS,
-    LOGIN_FAILD,
+    LOGIN_FAILED,
 
     REGISTER_START,
     REGISTER_SUCCESS,
-    REGISTER_FAILD,
+    REGISTER_FAILED,
 
     BASE_URL
 } from './types'
@@ -25,7 +25,7 @@ export const login = (params) => {
                     dispatch,
                     LOGIN_START,
                     LOGIN_SUCCESS,
-                    LOGIN_FAILD
+                    LOGIN_FAILED
                 )
             } else {
                 Alert.alert('UYARI', 'Lütfen geçerli bir email yazınız!')
@@ -47,7 +47,7 @@ export const register = (params) => {
                     dispatch,
                     REGISTER_START,
                     REGISTER_SUCCESS,
-                    REGISTER_FAILD
+                    REGISTER_FAILED
                 )
             } else {
                 Alert.alert('UYARI', 'Lütfen geçerli bir email yazınız!')

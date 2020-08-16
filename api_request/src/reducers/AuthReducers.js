@@ -1,11 +1,11 @@
 import {
     LOGIN_START,
     LOGIN_SUCCESS,
-    LOGIN_FAILD,
+    LOGIN_FAILED,
 
     REGISTER_START,
     REGISTER_SUCCESS,
-    REGISTER_FAILD,
+    REGISTER_FAILED,
 
 
 } from '../actions/types';
@@ -33,8 +33,8 @@ export default (state = INITIAL_STATE, action) => {
                 user: action.payload
             };
 
-        case LOGIN_FAILD:
-        case REGISTER_FAILD:
+        case LOGIN_FAILED:
+        case REGISTER_FAILED:
             return {
                 ...state,
                 loading: false,

@@ -6,15 +6,29 @@ import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { login } from '../../actions'
 import { StackActions } from '@react-navigation/native';
-
+import { LOCAL_AUTH_ID, USER } from '../../actions/types';
+import AsyncStorage from '@react-native-community/async-storage';
+import * as RootNavigation from '../../RootNavigation';
 
 const Login = (props) => {
     const [email, setEmail] = useState('test51@test.com')
     const [password, setPassword] = useState('123456')
 
+    const [loggedIn, setLoggedIn] = useState(false);
+
+useEffect(()=> {
+AsyncStorage.getItem(LOCAL_AUTH_ID).then((token)=> {
+  console.log('async ten gelen',token);
+    USER.token = token;
+    if(token){
+        RootNavigation.replace('Home') }
+})
+
+}, []);
 
     return (
         <ScrollView>
+            { loggedIn ? <ActivityIndicator size = 'large' /> :
             <View style={{
                 alignItems: 'center',
                 paddingTop: 30,
@@ -56,6 +70,7 @@ const Login = (props) => {
                 </TouchableOpacity>
 
             </View>
+                        }
         </ScrollView>
     )
 }
