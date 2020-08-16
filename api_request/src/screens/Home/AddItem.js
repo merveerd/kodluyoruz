@@ -7,7 +7,7 @@ import { postData } from '../../actions'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 
-const AddItems = (props) => {
+const AddItem = (props) => {
 
     const [name, setName] = useState('Kodluyoruz3')
     const [status, setStatus] = useState('Alive')
@@ -118,4 +118,4 @@ const mapStateToProps = ({ charactersResponse }) => {
     return { loadingAddItem };
 };
 
-export default connect(mapStateToProps, { postData })(AddItems);
+export default connect(mapStateToProps, { postData })(AddItem);

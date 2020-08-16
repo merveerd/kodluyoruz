@@ -30,7 +30,7 @@ export const getList = (params) => {
 export const postData = (params) => {
     return (dispatch) => {
         post(
-            BASE_URL.concat('/api/characters'),
+            BASE_URL.concat('/api/addCharacter'),
             params,
             dispatch,
             ADD_ITEM_START,

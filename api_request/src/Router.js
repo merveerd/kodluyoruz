@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from './screens/Auth/Login';
@@ -47,6 +47,20 @@ function Router(props) {
           options={({navigation, route}) => ({
             title: 'Home',
 
+            headerLeft: () => (
+                <TouchableOpacity
+                    onPress={() => {
+                        AsyncStorage.removeItem(LOCAL_AUTH_ID)
+                        USER.token = null
+                        navigation.replace('Login')
+                    }}
+                    style={{
+                        marginRight: 20
+                    }}
+                >
+                    <Image source={require('./img/logout.png')} style={{ width: 20, height: 20, margin: 10 }} />
+                </TouchableOpacity>
+            ),
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => navigation.navigate('AddItem')}
