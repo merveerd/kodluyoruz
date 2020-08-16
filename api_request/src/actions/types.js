@@ -12,6 +12,10 @@ export const ADD_ITEM_START = 'add_item_start';
 export const ADD_ITEM_SUCCESS = 'add_item_success';
 export const ADD_ITEM_FAILED = 'add_item_failed';
 
+export const REMOVE_ITEM_START = 'remove_item_start';
+export const REMOVE_ITEM_SUCCESS = 'remove_item_success';
+export const REMOVE_ITEM_FAILED = 'remove_item_failed';
+
 export const LIST_START = 'list_start';
 export const LIST_SUCCESS = 'list_success';
 export const LIST_FAILED = 'list_failed';

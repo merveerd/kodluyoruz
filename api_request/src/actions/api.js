@@ -21,14 +21,15 @@ export const post = (url, params, dispatch, start, success, failed) => {
         }
       }).then((response) => {
         console.log('Gelen POST Başarılı: => ', response.data );
-        dispatch({  type: success, payload: response.data  }) //guncellenecek
+        
+        dispatch({  type: success,  payload: method == 'removeCharacter' ?  params.id : response.data }) //guncellenecek
 
         if(method == 'login' || method == 'register'){
           RootNavigation.replace('Home');
 
           USER.token = response.data.token;
           AsyncStorage.setItem(LOCAL_AUTH_ID, response.data.token);
-        } else if(method == 'addCharacter'){
+        } else if(method == 'addCharacter' || method == 'removeCharacter'){
           RootNavigation.pop() //bi onceki sayfaya gittik
         }
      

@@ -50,9 +50,9 @@ function Router(props) {
             headerLeft: () => (
                 <TouchableOpacity
                     onPress={() => {
-                        AsyncStorage.removeItem(LOCAL_AUTH_ID)
-                        USER.token = null
-                        navigation.replace('Login')
+                        AsyncStorage.removeItem(LOCAL_AUTH_ID);
+                        USER.token = null;
+                        navigation.replace('Login');
                     }}
                     style={{
                         marginRight: 20

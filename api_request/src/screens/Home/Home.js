@@ -1,8 +1,16 @@
 import React, {useEffect} from 'react';
-import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import {connect} from 'react-redux';
 
-import {getList} from '../../actions';
+import {getList, removeItem} from '../../actions';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Home = (props) => {
   useEffect(() => {
@@ -25,6 +33,7 @@ const Home = (props) => {
           margin: 10,
           flexDirection: 'row',
           backgroundColor: 'white',
+          alignItems: 'center',
         }}>
         <Image
           defaultSource={require('../../img/dummy.png')}
@@ -37,6 +46,31 @@ const Home = (props) => {
           <Text style={styles.text}>Status: {item.status}</Text>
           <Text style={styles.text}>Species: {item.species}</Text>
         </View>
+        <TouchableOpacity
+          onPress={() => {Alert.alert(
+            'Warning',
+            'Are you sure you want to delete it?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => {},
+                style: 'cancel',
+              },
+
+              {
+                text: 'Yes',
+                onPress: () => {
+                  props.removeItem({id: item._id});
+                },
+              },
+            ],
+          )}}>
+          <Image
+            defaultSource={require('../../img/bin.png')}
+            style={{height: 20, width: 20}}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -82,4 +116,4 @@ const mapStateToProps = ({charactersResponse}) => {
   return {loadingCharacter, characters};
 };
 
-export default connect(mapStateToProps, {getList})(Home);
+export default connect(mapStateToProps, {getList, removeItem})(Home);

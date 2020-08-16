@@ -6,7 +6,11 @@ import {
 
     ADD_ITEM_START,
     ADD_ITEM_SUCCESS,
-    ADD_ITEM_FAILED
+    ADD_ITEM_FAILED,
+
+    REMOVE_ITEM_START,
+  REMOVE_ITEM_SUCCESS,
+  REMOVE_ITEM_FAILED,
 } from './types'
 
 import {
@@ -26,6 +30,20 @@ export const getList = (params) => {
         )
     }
 }
+
+export const removeItem = (params) => {
+    return (dispatch) => {
+        post(
+            BASE_URL.concat('/api/removeCharacter'),
+            params,
+            dispatch,
+            REMOVE_ITEM_START,
+            REMOVE_ITEM_SUCCESS,
+            REMOVE_ITEM_FAILED
+        )
+    }
+}
+
 
 export const postData = (params) => {
     return (dispatch) => {
