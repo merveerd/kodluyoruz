@@ -1,5 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {Text, View, ScrollView, ActivityIndicator} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {
+  Text,
+  View,
+  ScrollView,
+  Animated,
+  Keyboard,
+  SafeAreaView,
+} from 'react-native';
 
 import {Input, Button} from '../../components';
 import {connect} from 'react-redux';
@@ -12,75 +19,122 @@ const Register = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const animation = useRef(new Animated.Value(0)).current;
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Keyboard.addListener('keyboardWillShow', _keyboardWillShow);
+    Keyboard.addListener('keyboardWillHide', _keyboardWillHide);
+
+    return () => {
+      Keyboard.removeListener('keyboardWillShow', _keyboardWillShow);
+      Keyboard.removeListener('keyboardWillHide', _keyboardWillHide);
+    };
+  }, []);
+
+  const _keyboardWillShow = (e) => {
+    const height = e.endCoordinates.height;
+    Animated.timing(animation, {
+      toValue: -height +35 ,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const _keyboardWillHide = (e) => {
+    Animated.timing(animation, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
   return (
-    <ScrollView>
-      <View
-        style={{
-          alignItems: 'center',
-          paddingTop: 30,
-          flex: 1,
-        }}>
+    <SafeAreaView style = {{flex: 1, marginLeft: '15%'}}> 
+   
         <View
           style={{
-            flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            padding: 10,
-            justifyContent: 'space-between',
+            marginRight: '10%',
+            flex: 1,
           }}>
           <Text
             onPress={() => props.navigation.pop()}
-            style={{color: colors.main, fontSize: 14}}>
-            Vazgeç
+            style={{color: colors.main, fontSize: 30}}>
+            {'<'}
           </Text>
           <Icon
-            style={{color: colors.main}}
+            style={{color: colors.main,   marginLeft : '40%'}}
             type="FontAwesome"
             name={'twitter'}
-            fontSize={40}
+
           />
         </View>
+        <View style = {{flex: 8, marginTop: '20%'}}>
+          <ScrollView>
+            <Input
+              placeholder="firstname"
+              value={firstName}
+              onChangeText={(value) => setFirstname(value)}
+            />
 
-        <Input
-          placeholder="firstname"
-          value={firstName}
-          onChangeText={(value) => setFirstname(value)}
-        />
+            <Input
+              placeholder="username"
+              value={userName}
+              onChangeText={(value) => setuserName(value)}
+            />
 
-        <Input
-          placeholder="username"
-          value={userName}
-          onChangeText={(value) => setuserName(value)}
-        />
+            <Input
+              placeholder="email"
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+            />
+            <Input
+              placeholder="password"
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+              secureTextEntry
+            />
+          </ScrollView>
+        </View>
+        <Animated.View
+          style={[
+            {
+              flex: 0.6,
+              backgroundColor: '#edeeef',
+              borderTopColor: '#b7b7b7',
+              borderTopWidth: 0.3,
+              flexDirection: 'row',
+              alignItems: 'center',
+              padding: 10,
+              justifyContent: 'space-between',
+            },
+            {
+              transform: [
+                {
+                  translateY: animation,
+                },
+              ],
+            },
+          ]}>
+          <Button
+            text={'Register'}
+            loading={props.loading}
+            style={{height: 40, width: '85%'}}
+            onPress={() => {
+              const params = {
+                email,
+                password,
+                firstName,
+                userName,
+              };
+              props.register(params);
+            }}
+          />
+        </Animated.View>
 
-        <Input
-          placeholder="email"
-          value={email}
-          onChangeText={(value) => setEmail(value)}
-        />
-        <Input
-          placeholder="password"
-          value={password}
-          onChangeText={(value) => setPassword(value)}
-          secureTextEntry
-        />
-
-        <Button
-          text={'Register'}
-          loading={props.loading}
-          style={{height: 40, width: '90%'}}
-          onPress={() => {
-            const params = {
-              email,
-              password,
-              firstName,
-              userName,
-            };
-            props.register(params);
-          }}
-        />
-      </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

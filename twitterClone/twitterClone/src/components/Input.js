@@ -12,11 +12,13 @@ const Input = (props) => (
         value={props.value}
         onChangeText={(value) => props.onChangeText(value)}
         style={[{
-         width: '70%',
+         width: '85%',
             height: '60%',
             color: '#424242',
             borderBottomColor: '#b7b7b7',
-            borderBottomWidth: 1
+            borderBottomWidth: 1,
+            marginBottom: '1%'
+
         }, props.style]}
     />
 );
